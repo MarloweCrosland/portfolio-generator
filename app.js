@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
-//const fs = require('fs');
-//const generatePage = require('./src/page-template');
+const fs = require('fs');
+const generatePage = require('./src/page-template');
 
 const promptUser = () => {
 return inquirer.prompt([
@@ -133,7 +133,12 @@ if (!portfolioData.projects) {
   promptUser()
   .then(promptProject)
   .then(portfolioData => {
-      console.log(portfolioData);
+      const pageHTML = generatePage(portfolioData);
+//   fs.writeFile('index.html', pageHTML, err=> {
+//       if (err) throw new Error(err);
+
+//       console.log('portfolio complete Check out index.html');
+//   });
 });
 
 
@@ -154,20 +159,3 @@ if (!portfolioData.projects) {
 
 
 
-// const pageHTML = generatePage(x,y);
-
-
-
-
-
-
-
-
-
-
-
-//   fs.writeFile('index.html', generatePage(x,y), err=> {
-//       if (err) throw new Error(err);
-
-//       console.log('portfolio complete Check out index.html');
-//   });
