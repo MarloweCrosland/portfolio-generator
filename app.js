@@ -7,18 +7,47 @@ return inquirer.prompt([
     {
         type: 'input',
         name: 'name',
-        message: 'what is your name?',
+        message: 'what is your name? (Required)',
+        validate: nameInput => {
+            if (nameInput){
+                return true;
+            } else {
+                console.log('please enter your name!');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'github',
-        message: 'what is your github username?',
+        message: 'what is your github username? (Required)',
+        validate: gitInput => {
+            if (gitInput){
+                return true;
+            } else {
+                console.log('please enter your github username');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'confirm',
+        name: 'confirmAbout',
+        message: 'Would you like to provide some information about yourself?',
+        default: true
     },
     {
         type: 'input',
         name: 'about',
-        message: 'Provide some information about yourself',
-    },
+        message: 'Provide some information about yourself:',
+        when: ({confirmAbout}) => {
+            if (confirmAbout){
+                return true
+            } else {
+                return false;
+            }
+        }
+    }
 ]);
 };
 
@@ -40,12 +69,28 @@ if (!portfolioData.projects) {
       {
         type: 'input',
         name: 'name',
-        message: 'What is the name of your project?'
+        message: 'What is the name of your project? (Required)',
+        validate: projectName => {
+            if (projectName){
+                return true
+            } else {
+                console.log('please enter a project name!')
+                return false;
+            }
+        }
       },
       {
         type: 'input',
         name: 'description',
-        message: 'Provide a description of the project (Required)'
+        message: 'Provide a description of the project (Required)',
+        validate: descriptionVal => {
+            if (descriptionVal){
+                return true
+            } else {
+                console.log('please emter a project description!')
+                return false;
+            }
+        }
       },
       {
         type: 'checkbox',
